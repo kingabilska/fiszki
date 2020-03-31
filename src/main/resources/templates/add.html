@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Set</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h3>Add Set</h3>
+<form method="post">
+    <label for="title">Title:</label>
+    <br>
+    <input type="text" id="title" name="title">
+    <br>
+    <label for="detail">Detail:</label>
+    <br>
+    <input type="text" id="detail" name="detail">
+    <br>
+    <label for="languages">Languages:</label>
+    <br>
+    <input type="text" id="languages" name="languages">
+    <br>
+    <br>
+    <input type="submit" value="Save">
+    <a th:href="@{/}">
+        <button type="button">Back</button>
+    </a>
+</form>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Set</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h3>View Set</h3>
+<div th:object="${set}">
+    <label for="title">Title:</label>
+    <br>
+    <input type="text" id="title" name="title" disabled th:value="*{title}">
+    <br>
+    <label for="detail">Detail:</label>
+    <br>
+    <input type="text" id="detail" name="detail" disabled th:value="*{detail}">
+    <br>
+    <label for="languages">Languages:</label>
+    <br>
+    <input type="text" id="languages" name="languages" disabled th:value="*{languages}">
+    <br>
+    <br>
+    <a th:href="@{/edit/{id}(id=*{id})}"><button>Edit</button></a>
+    <a th:href="@{/delete/{id}(id=*{id})}"><button>Delete</button></a>
+    <a th:href="@{/}"><button>Back</button></a>
+</div>
+</body>
+</html>

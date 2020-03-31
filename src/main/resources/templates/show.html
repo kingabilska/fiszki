@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Flashcards Sets</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h3>Manage Flashcards Sets</h3>
+<h4 th:if="${#lists.isEmpty(sets)}">No Sets Available</h4>
+<table border="1" th:unless="${#lists.isEmpty(sets)}">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Languages</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="set : ${sets}">
+        <th th:text="${setStat.index}"></th>
+        <td th:text="${set.title}">Title</td>
+        <td th:text="${set.languages}">Languages</td>
+        <td><a th:href="@{/{id}(id=${set.id})}">Show</a></td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<a th:href="@{/add}"><button>Add</button></a>
+</body>
+</html>

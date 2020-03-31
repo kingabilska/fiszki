@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Set</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h3>Edit Set</h3>
+<form method="post" th:object="${set}">
+    <label for="title">Title:</label>
+    <br>
+    <input type="text" id="title" name="title" th:value="*{title}">
+    <br>
+    <label for="detail">Detail:</label>
+    <br>
+    <input type="text" id="detail" name="detail" th:value="*{detail}">
+    <br>
+    <label for="languages">Languages:</label>
+    <br>
+    <input type="text" id="languages" name="languages" th:value="*{languages}">
+    <br>
+    <br>
+    <input type="submit" value="Save">
+    <a th:href="@{/{id}(id=*{id})}">
+        <button type="button">Back</button>
+    </a>
+</form>
+</body>
+</html>
