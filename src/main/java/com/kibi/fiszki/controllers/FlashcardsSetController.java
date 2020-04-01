@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.persistence.EntityNotFoundException;
 
 @Controller
-public class FlashcardsController {
-
+public class FlashcardsSetController {
 	@Autowired
 	FlashcardsSetService service;
 
@@ -22,7 +21,7 @@ public class FlashcardsController {
 	public String getAll(Model model) {
 		Iterable<FlashcardsSet> sets = service.getAll();
 		model.addAttribute("sets", sets);
-		return "show";
+		return "set/show";
 	}
 
 	@GetMapping("/{id}")
@@ -30,12 +29,12 @@ public class FlashcardsController {
 		FlashcardsSet set = service.getById(id)
 				.orElseThrow(EntityNotFoundException::new);
 		model.addAttribute("set", set);
-		return "showOne";
+		return "set/showOne";
 	}
 
 	@GetMapping("/add")
 	public String add() {
-		return "add";
+		return "set/add";
 	}
 
 	@PostMapping("/add")
@@ -49,7 +48,7 @@ public class FlashcardsController {
 		FlashcardsSet set = service.getById(id)
 				.orElseThrow(EntityNotFoundException::new);
 		model.addAttribute("set", set);
-		return "edit";
+		return "set/edit";
 	}
 
 	@PostMapping("/edit/{id}")

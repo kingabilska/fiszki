@@ -3,10 +3,9 @@ package com.kibi.fiszki.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,4 +18,7 @@ public class FlashcardsSet {
 	private String title;
 	private String detail;
 	private String languages;
+
+	@OneToMany(mappedBy = "flashcardsSet", cascade = CascadeType.ALL)
+	private Set<Flashcard> flashcards = new HashSet<>();
 }

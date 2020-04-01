@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     <tr th:each="set : ${sets}">
-        <th th:text="${setStat.index}"></th>
+        <td th:text="${setStat.index}"></td>
         <td th:text="${set.title}">Title</td>
         <td th:text="${set.languages}">Languages</td>
         <td><a th:href="@{/{id}(id=${set.id})}">Show</a></td>
