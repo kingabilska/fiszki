@@ -14,6 +14,41 @@ import javax.persistence.EntityNotFoundException;
 
 @Controller
 public class FlashcardController {
-	@Autowired
-	FlashcardService service;
+    @Autowired
+    FlashcardService service;
+
+    @GetMapping("/flashcard/add/{id}")
+    public String add(@PathVariable Long id, Model model) {
+        model.addAttribute("setId", id);
+        return "flashcard/add";
+    }
+
+    @PostMapping("/flashcard/add")
+    public String add(@ModelAttribute Flashcard flashcard) {
+        Flashcard saved = service.save(flashcard);
+        return "redirect:/" + saved.getFlashcardsSet().getId();
+    }
+
+    @GetMapping("/flashcard/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        Flashcard flashcard = service.getById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        model.addAttribute("flashcard", flashcard);
+        return "flashcard/edit";
+    }
+
+    @PostMapping("/flashcard/edit/{id}")
+    public String edit(@PathVariable Long id, @ModelAttribute Flashcard flashcard) {
+        flashcard.setId(id);
+        Flashcard saved = service.save(flashcard);
+        return "redirect:/" + saved.getFlashcardsSet().getId();
+    }
+
+    @GetMapping("/flashcard/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        Flashcard flashcard = service.getById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        service.delete(flashcard);
+        return "redirect:/" + flashcard.getFlashcardsSet().getId();
+    }
 }

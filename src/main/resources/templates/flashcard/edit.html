@@ -1,15 +1,27 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Set</title>
+    <title>Edit Flashcard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <h3>Edit Flashcard</h3>
 <form method="post" th:object="${flashcard}">
-
-<!--fill me up :P-->
-
+    <input type="hidden" id="flashcardsSet" name="flashcardsSet" th:value="*{flashcardsSet.id}">
+    <br>
+    <label for="leftside">Left side:</label>
+    <br>
+    <input type="text" id="leftside" name="leftSide" th:value="*{leftSide}">
+    <br>
+    <label for="rightside">Right side:</label>
+    <br>
+    <input type="text" id="rightside" name="rightSide" th:value="*{rightSide}">
+    <br>
+    <br>
+    <input type="submit" value="Save">
+    <a th:href="@{/{id}(id=*{flashcardsSet.id})}">
+        <button type="button">Back</button>
+    </a>
 </form>
 </body>
 </html>

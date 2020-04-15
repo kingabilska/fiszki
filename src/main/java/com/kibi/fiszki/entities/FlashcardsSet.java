@@ -11,6 +11,7 @@ import java.util.Set;
 @Setter
 @Entity
 public class FlashcardsSet {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -21,4 +22,5 @@ public class FlashcardsSet {
 
 	@OneToMany(mappedBy = "flashcardsSet", cascade = CascadeType.ALL)
 	private Set<Flashcard> flashcards = new HashSet<>();
+
 }

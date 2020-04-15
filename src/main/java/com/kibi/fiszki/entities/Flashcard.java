@@ -2,15 +2,22 @@ package com.kibi.fiszki.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 public class Flashcard {
 
-//	fill me up :P
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn
-	private FlashcardsSet flashcardsSet;
+    private String leftSide;
+    private String rightSide;
+
+    @ManyToOne
+    @JoinColumn
+    private FlashcardsSet flashcardsSet;
+
 }

@@ -20,18 +20,46 @@
     <input type="text" id="languages" name="languages" disabled th:value="*{languages}">
     <br>
     <br>
-    <a th:href="@{/edit/{id}(id=*{id})}"><button>Edit</button></a>
-    <a th:href="@{/delete/{id}(id=*{id})}"><button>Delete</button></a>
-    <a th:href="@{/}"><button>Back</button></a>
+    <a th:href="@{/edit/{id}(id=*{id})}">
+        <button>Edit</button>
+    </a>
+    <a th:href="@{/delete/{id}(id=*{id})}">
+        <button>Delete</button>
+    </a>
+    <a th:href="@{/}">
+        <button>Back</button>
+    </a>
+    <br>
+    <br>
 
-    <br>
-    <br>
     <table border="1">
         <thead>
-
+        <tr>
+            <th style="border: 0">Flashcards</th>
+            <th style="opacity: 0"></th>
+            <th style="border: 0"><a th:href="@{/flashcard/add/{id}(id=*{id})}">
+                <button>Add</button>
+            </a></th>
+        </tr>
+        <tr>
+            <th th:if="${#lists.isEmpty(set)}">No Flashcards Available</th>
+            <th>Left side</th>
+            <th>Right side</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
-
+        <tr th:each="flashcard : *{flashcards}">
+            <td th:text="${flashcard.leftSide}">Left side</td>
+            <td th:text="${flashcard.rightSide}">Right side</td>
+            <td><a th:href="@{flashcard/edit/{id}(id=${flashcard.id})}">
+                <button>Edit</button>
+            </a>
+                <a th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">
+                    <button>Delete</button>
+                </a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
