@@ -3,33 +3,25 @@
 <head>
     <title>Add Flashcard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
 <h3>Add Flashcard</h3>
-<form method="post" th:action="@{/flashcard/add/{id}(id=*{id})}">
-
-    <div>
-        <input type="hidden" id="flashcardsSet" name="flashcardsSet" th:value="${setId}">
-        <br>
-        <label for="leftside">Left side:</label>
-        <br>
-        <input type="text" id="leftside" name="leftSide">
-        <br>
-        <label for="rightside">Right side:</label>
-        <br>
-        <input type="text" id="rightside" name="rightSide">
-        <br>
-        <br>
-
-        <a th:href="@{{id}(id=*{setId})}">
-            <button>Save</button>
-        </a>
-
-        <a th:href="@{/{id}(id=*{setId})}">
-            <button>Back</button>
-        </a>
-    </div>
-
+<form method="post" action="/flashcard/add">
+    <input type="hidden" id="flashcardsSet" name="flashcardsSet" th:value="${setId}">
+    <label for="leftSide">Left side:</label>
+    <br>
+    <input type="text" id="leftSide" name="leftSide">
+    <br>
+    <label for="rightSide">Right side:</label>
+    <br>
+    <input type="text" id="rightSide" name="rightSide">
+    <br>
+    <br>
+    <input type="submit" value="Save">
+    <a th:href="@{/{id}(id=${setId})}">
+        <button type="button">Back</button>
+    </a>
 </form>
 </body>
 </html>

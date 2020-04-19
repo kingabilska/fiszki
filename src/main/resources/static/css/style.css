@@ -1,0 +1,9 @@
+.active {
+    background-color: bisque;
+}
+.pagination > a {
+    margin-right: 5px;
+}
+.fieldError {
+    border: 2px solid red;
+}

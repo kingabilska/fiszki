@@ -3,19 +3,19 @@
 <head>
     <title>Edit Flashcard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
 <h3>Edit Flashcard</h3>
 <form method="post" th:object="${flashcard}">
     <input type="hidden" id="flashcardsSet" name="flashcardsSet" th:value="*{flashcardsSet.id}">
+    <label for="leftSide">Left side:</label>
     <br>
-    <label for="leftside">Left side:</label>
+    <input type="text" id="leftSide" name="leftSide" th:value="*{leftSide}">
     <br>
-    <input type="text" id="leftside" name="leftSide" th:value="*{leftSide}">
+    <label for="rightSide">Right side:</label>
     <br>
-    <label for="rightside">Right side:</label>
-    <br>
-    <input type="text" id="rightside" name="rightSide" th:value="*{rightSide}">
+    <input type="text" id="rightSide" name="rightSide" th:value="*{rightSide}">
     <br>
     <br>
     <input type="submit" value="Save">
