@@ -2,6 +2,7 @@ package com.kibi.fiszki.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.*;
 
 @Getter
@@ -19,5 +20,4 @@ public class Flashcard {
     @ManyToOne
     @JoinColumn
     private FlashcardsSet flashcardsSet;
-
 }

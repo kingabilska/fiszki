@@ -14,55 +14,55 @@ import javax.persistence.EntityNotFoundException;
 
 @Controller
 public class FlashcardsSetController {
-	@Autowired
-	FlashcardsSetService service;
+    @Autowired
+    FlashcardsSetService service;
 
-	@GetMapping
-	public String getAll(Model model) {
-		Iterable<FlashcardsSet> sets = service.getAll();
-		model.addAttribute("sets", sets);
-		return "set/show";
-	}
+    @GetMapping
+    public String getAll(Model model) {
+        Iterable<FlashcardsSet> sets = service.getAll();
+        model.addAttribute("sets", sets);
+        return "set/show";
+    }
 
-	@GetMapping("/{id}")
-	public String getOne(@PathVariable Long id, Model model) {
-		FlashcardsSet set = service.getById(id)
-				.orElseThrow(EntityNotFoundException::new);
-		model.addAttribute("set", set);
-		return "set/showOne";
-	}
+    @GetMapping("/{id}")
+    public String getOne(@PathVariable Long id, Model model) {
+        FlashcardsSet set = service.getById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        model.addAttribute("set", set);
+        return "set/showOne";
+    }
 
-	@GetMapping("/add")
-	public String add() {
-		return "set/add";
-	}
+    @GetMapping("/add")
+    public String add() {
+        return "set/add";
+    }
 
-	@PostMapping("/add")
-	public String add(@ModelAttribute FlashcardsSet set) {
-		FlashcardsSet saved = service.save(set);
-		return "redirect:/" + saved.getId();
-	}
+    @PostMapping("/add")
+    public String add(@ModelAttribute FlashcardsSet set) {
+        FlashcardsSet saved = service.save(set);
+        return "redirect:/" + saved.getId();
+    }
 
-	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable Long id, Model model) {
-		FlashcardsSet set = service.getById(id)
-				.orElseThrow(EntityNotFoundException::new);
-		model.addAttribute("set", set);
-		return "set/edit";
-	}
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        FlashcardsSet set = service.getById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        model.addAttribute("set", set);
+        return "set/edit";
+    }
 
-	@PostMapping("/edit/{id}")
-	public String edit(@PathVariable Long id, @ModelAttribute FlashcardsSet set) {
-		set.setId(id);
-		FlashcardsSet saved = service.save(set);
-		return "redirect:/" + saved.getId();
-	}
+    @PostMapping("/edit/{id}")
+    public String edit(@PathVariable Long id, @ModelAttribute FlashcardsSet set) {
+        set.setId(id);
+        FlashcardsSet saved = service.save(set);
+        return "redirect:/" + saved.getId();
+    }
 
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable Long id) {
-		FlashcardsSet set = service.getById(id)
-				.orElseThrow(EntityNotFoundException::new);
-		service.delete(set);
-		return "redirect:/";
-	}
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        FlashcardsSet set = service.getById(id)
+                .orElseThrow(EntityNotFoundException::new);
+        service.delete(set);
+        return "redirect:/";
+    }
 }

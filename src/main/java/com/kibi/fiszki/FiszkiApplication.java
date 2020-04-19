@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class FiszkiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FiszkiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FiszkiApplication.class, args);
+    }
 
 }

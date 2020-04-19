@@ -12,15 +12,14 @@ import java.util.Set;
 @Entity
 public class FlashcardsSet {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String title;
-	private String detail;
-	private String languages;
+    private String title;
+    private String detail;
+    private String languages;
 
-	@OneToMany(mappedBy = "flashcardsSet", cascade = CascadeType.ALL)
-	private Set<Flashcard> flashcards = new HashSet<>();
-
+    @OneToMany(mappedBy = "flashcardsSet", cascade = CascadeType.ALL)
+    private Set<Flashcard> flashcards = new HashSet<>();
 }

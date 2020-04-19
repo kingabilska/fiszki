@@ -9,22 +9,22 @@ import java.util.Optional;
 
 @Service
 public class FlashcardsSetService {
-	@Autowired
-	private FlashcardsSetRepository repository;
+    @Autowired
+    private FlashcardsSetRepository repository;
 
-	public Iterable<FlashcardsSet> getAll() {
-		return repository.findAll();
-	}
+    public Iterable<FlashcardsSet> getAll() {
+        return repository.findAll();
+    }
 
-	public Optional<FlashcardsSet> getById(Long id) {
-		return repository.findById(id);
-	}
+    public Optional<FlashcardsSet> getById(Long id) {
+        return repository.findById(id);
+    }
 
-	public FlashcardsSet save(FlashcardsSet set) {
-		return repository.save(set);
-	}
+    public FlashcardsSet save(FlashcardsSet set) {
+        return repository.save(set);
+    }
 
-	public void delete(FlashcardsSet set) {
-		repository.delete(set);
-	}
+    public void delete(FlashcardsSet set) {
+        repository.delete(set);
+    }
 }
