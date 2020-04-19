@@ -2,13 +2,12 @@ package com.kibi.fiszki.controllers;
 
 import com.kibi.fiszki.entities.FlashcardsSet;
 import com.kibi.fiszki.services.FlashcardsSetService;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -17,10 +16,22 @@ public class FlashcardsSetController {
     @Autowired
     FlashcardsSetService service;
 
+    // tylko w celach testowych paginacji
+    @Setter
+    @AllArgsConstructor
+    class Page {
+        Integer totalPages;
+        Integer number;
+    }
+
     @GetMapping
     public String getAll(Model model) {
         Iterable<FlashcardsSet> sets = service.getAll();
         model.addAttribute("sets", sets);
+
+        // tylko w celach testowych paginacji
+        model.addAttribute("page", new Page(3, 1));
+
         return "set/show";
     }
 

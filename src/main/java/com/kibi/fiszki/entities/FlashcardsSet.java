@@ -1,5 +1,6 @@
 package com.kibi.fiszki.entities;
 
+import com.kibi.fiszki.enums.Language;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +19,7 @@ public class FlashcardsSet {
 
     private String title;
     private String detail;
-    private String languages;
+    private Language languages;
 
     @OneToMany(mappedBy = "flashcardsSet", cascade = CascadeType.ALL)
     private Set<Flashcard> flashcards = new HashSet<>();
