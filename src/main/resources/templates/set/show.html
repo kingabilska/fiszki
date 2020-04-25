@@ -13,10 +13,10 @@
         <th colspan="3">Flashcard sets</th>
         <th><a th:href="@{/add}">Add</a></th>
     </tr>
-    <tr th:if="*{#lists.isEmpty(sets)}">
+    <tr th:if="*{#lists.isEmpty(page.content)}">
         <th colspan="4">No Flashcards Available</th>
     </tr>
-    <tr th:unless="*{#lists.isEmpty(sets)}">
+    <tr th:unless="*{#lists.isEmpty(page.content)}">
         <th>#</th>
         <th>Title</th>
         <th>Languages</th>
@@ -24,7 +24,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="set : ${sets}">
+    <tr th:each="set : ${page.content}">
         <td th:text="${setStat.index}"></td>
         <td th:text="${set.title}">Title</td>
         <td th:text="${set.languages}">Languages</td>

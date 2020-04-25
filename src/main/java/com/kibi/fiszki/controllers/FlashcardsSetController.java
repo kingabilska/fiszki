@@ -6,16 +6,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 
+import static com.kibi.fiszki.Constants.DEFAULT_PAGE;
+import static com.kibi.fiszki.Constants.DEFAULT_PAGE_SIZE;
+
 @Controller
 public class FlashcardsSetController {
     @Autowired
     FlashcardsSetService service;
+
 
     // tylko w celach testowych paginacji
     @Getter
@@ -27,13 +32,11 @@ public class FlashcardsSetController {
     }
 
     @GetMapping
-    public String getAll(Model model) {
-        Iterable<FlashcardsSet> sets = service.getAll();
-        model.addAttribute("sets", sets);
-//        int totalPages = sets.getTotalPages();
-        // tylko w celach testowych paginacji
-        model.addAttribute("page", new Page(3, 1));
-
+    public String getAll(@RequestParam(defaultValue = DEFAULT_PAGE) Integer page,
+                         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+                         Model model) {
+        Page<FlashcardsSet> pageSet = service.getAll(page, size);
+        model.addAttribute("page", pageSet);
         return "set/show";
     }
 
