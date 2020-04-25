@@ -3,6 +3,7 @@ package com.kibi.fiszki.controllers;
 import com.kibi.fiszki.entities.FlashcardsSet;
 import com.kibi.fiszki.services.FlashcardsSetService;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ public class FlashcardsSetController {
     FlashcardsSetService service;
 
     // tylko w celach testowych paginacji
+    @Getter
     @Setter
     @AllArgsConstructor
     class Page {
@@ -28,7 +30,7 @@ public class FlashcardsSetController {
     public String getAll(Model model) {
         Iterable<FlashcardsSet> sets = service.getAll();
         model.addAttribute("sets", sets);
-
+//        int totalPages = sets.getTotalPages();
         // tylko w celach testowych paginacji
         model.addAttribute("page", new Page(3, 1));
 

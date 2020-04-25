@@ -37,8 +37,12 @@
                 <button>Add</button>
             </a></th>
         </tr>
-        <tr>
-            <th th:if="${#lists.isEmpty(set)}">No Flashcards Available</th>
+
+
+        <tr th:if="*{#lists.isEmpty(flashcards)}">
+            <th colspan="4">No Flashcards Available</th>
+        </tr>
+        <tr th:unless="*{#lists.isEmpty(flashcards)}">
             <th>Left side</th>
             <th>Right side</th>
             <th>Actions</th>

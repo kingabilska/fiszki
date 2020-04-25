@@ -32,12 +32,14 @@
     </tr>
     </tbody>
 </table>
-<!--fill it!-->
-<!--<span th:if="${}" class="pagination">-->
-<!--    <a th:each="pageNumber : ${}"-->
-<!--       th:href="@{}"-->
-<!--       th:text="${}"-->
-<!--       th:class="${} ? active"></a>-->
-<!--</span>-->
+
+<span th:if="${page.totalPages> 1}" class="pagination">
+    <a th:each="pageNumber : ${#numbers.sequence(1, page.totalPages)}"
+       th:href="@{/(page=${pageNumber -1})}"
+       th:text="${pageNumber}"
+       th:class="${page.number +1 == pageNumber} ? active"></a>
+</span>
+
+
 </body>
 </html>
