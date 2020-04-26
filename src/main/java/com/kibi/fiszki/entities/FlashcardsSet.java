@@ -1,6 +1,7 @@
 package com.kibi.fiszki.entities;
 
 import com.kibi.fiszki.enums.Language;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

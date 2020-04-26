@@ -21,22 +21,14 @@ public class FlashcardsSetController {
     @Autowired
     FlashcardsSetService service;
 
-
-    // tylko w celach testowych paginacji
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    class Page {
-        Integer totalPages;
-        Integer number;
-    }
-
     @GetMapping
     public String getAll(@RequestParam(defaultValue = DEFAULT_PAGE) Integer page,
                          @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) Integer size,
                          Model model) {
         Page<FlashcardsSet> pageSet = service.getAll(page, size);
+        int shift = page * size;
         model.addAttribute("page", pageSet);
+        model.addAttribute("shift", shift);
         return "set/show";
     }
 

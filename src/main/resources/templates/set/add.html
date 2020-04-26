@@ -18,15 +18,12 @@
     <br>
     <label for="languages">Languages:</label>
     <br>
-    <!--remove it!-->
-    <input type="text" id="languages" name="languages">
-    <!--fill it!-->
-<!--    <select id="languages" name="languages">-->
-<!--        <option value="" th:text="'-'"></option>-->
-<!--        <option th:each="language : ${T().}"-->
-<!--                th:value="${}"-->
-<!--                th:text="${}"></option>-->
-<!--    </select>-->
+
+    <select id="languages" name="languages">
+        <option th:each="language : ${T(com.kibi.fiszki.enums.Language).values()}"
+                th:value="${language}"
+                th:text="${language}" </option>
+    </select>
     <br>
     <br>
     <input type="submit" value="Save">
