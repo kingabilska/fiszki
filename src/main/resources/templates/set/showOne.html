@@ -28,7 +28,6 @@
     <br>
 
     <table border="1">
-        <!--repair <thead> like in show.html-->
         <thead>
         <tr>
             <th style="border: 0">Flashcards</th>
@@ -37,8 +36,6 @@
                 <button>Add</button>
             </a></th>
         </tr>
-
-
         <tr th:if="*{#lists.isEmpty(flashcards)}">
             <th colspan="4">No Flashcards Available</th>
         </tr>

@@ -18,11 +18,7 @@
     <br>
     <label for="languages">Languages:</label>
     <br>
-    <!--remove it!-->
-    <!--    <input type="text" id="languages" name="languages" th:value="*{languages}">-->
-    <!--fill it!-->
-
-    <select id="languages" name="languages" th:errorClass="fieldError">
+    <select id="languages" name="languages">
         <option th:each="language : ${T(com.kibi.fiszki.enums.Language).values()}"
                 th:value="${language}"
                 th:text="${language}"

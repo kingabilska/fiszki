@@ -32,14 +32,11 @@
     </tr>
     </tbody>
 </table>
-
-<span th:if="${page.totalPages> 1}" class="pagination">
+<span th:if="${page.totalPages > 1}" class="pagination">
     <a th:each="pageNumber : ${#numbers.sequence(1, page.totalPages)}"
-       th:href="@{/(page=${pageNumber -1})}"
+       th:href="@{/(page=${pageNumber - 1})}"
        th:text="${pageNumber}"
-       th:class="${page.number +1 == pageNumber} ? active"></a>
+       th:class="${page.number + 1 == pageNumber} ? active"></a>
 </span>
-
-
 </body>
 </html>
