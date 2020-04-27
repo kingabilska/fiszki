@@ -18,6 +18,5 @@ public class Flashcard {
     private String rightSide;
 
     @ManyToOne
-    @JoinColumn
     private FlashcardsSet flashcardsSet;
 }

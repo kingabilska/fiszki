@@ -1,34 +1,36 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Set</title>
+    <title th:text="#{title.add.set}">Add Set</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
-<h3>Add Set</h3>
-<form method="post">
-    <label for="title">Title:</label>
+<h3 th:text="#{title.add.set}">Add Set</h3>
+<form method="post" th:object="${set}">
+    <label for="title" th:text="#{label.set.required.title}">Title*:</label>
     <br>
-    <input type="text" id="title" name="title">
+    <input type="text" id="title" name="title" th:value="*{title}" th:errorClass="fieldError">
+    <span th:errors="*{title}"></span>
     <br>
-    <label for="detail">Detail:</label>
+    <label for="detail" th:text="#{label.set.detail}">Details:</label>
     <br>
-    <input type="text" id="detail" name="detail">
+    <input type="text" id="detail" name="detail" th:value="*{detail}" th:errorClass="fieldError">
+    <span th:errors="*{detail}"></span>
     <br>
-    <label for="languages">Languages:</label>
+    <label for="languages" th:text="#{label.set.required.languages}">Languages*:</label>
     <br>
-
-    <select id="languages" name="languages">
+    <select id="languages" name="languages" th:errorClass="fieldError">
         <option th:each="language : ${T(com.kibi.fiszki.enums.Language).values()}"
                 th:value="${language}"
                 th:text="${language}" </option>
     </select>
+    <span th:errors="*{languages}"></span>
     <br>
     <br>
-    <input type="submit" value="Save">
+    <input type="submit" value="Save" th:value="#{button.save}">
     <a th:href="@{/}">
-        <button type="button">Back</button>
+        <button type="button" th:text="#{button.back}">Back</button>
     </a>
 </form>
 </body>

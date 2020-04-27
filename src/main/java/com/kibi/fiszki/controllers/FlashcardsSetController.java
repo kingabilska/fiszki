@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 
 import static com.kibi.fiszki.Constants.DEFAULT_PAGE;
 import static com.kibi.fiszki.Constants.DEFAULT_PAGE_SIZE;
@@ -38,12 +40,16 @@ public class FlashcardsSetController {
     }
 
     @GetMapping("/add")
-    public String add() {
+    public String add(Model model) {
+        model.addAttribute("set", new FlashcardsSet());
         return "set/add";
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute FlashcardsSet set) {
+    public String add(@Valid @ModelAttribute("set") FlashcardsSet set, BindingResult result) {
+        if (result.hasErrors()) {
+            return "set/add";
+        }
         FlashcardsSet saved = service.save(set);
         return "redirect:/" + saved.getId();
     }
@@ -57,7 +63,11 @@ public class FlashcardsSetController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, @ModelAttribute FlashcardsSet set) {
+    public String edit(@PathVariable Long id,
+                       @Valid @ModelAttribute("set") FlashcardsSet set, BindingResult result) {
+        if (result.hasErrors()) {
+            return "set/edit";
+        }
         set.setId(id);
         FlashcardsSet saved = service.save(set);
         return "redirect:/" + saved.getId();
