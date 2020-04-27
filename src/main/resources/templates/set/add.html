@@ -8,7 +8,7 @@
 <body>
 <h3 th:text="#{title.add.set}">Add Set</h3>
 <form method="post" th:object="${set}">
-    <label for="title" th:text="#{label.set.required.title}">Title*:</label>
+    <label for="title" th:text="#{label.set.title.required}">Title*:</label>
     <br>
     <input type="text" id="title" name="title" th:value="*{title}" th:errorClass="fieldError">
     <span th:errors="*{title}"></span>
@@ -18,7 +18,7 @@
     <input type="text" id="detail" name="detail" th:value="*{detail}" th:errorClass="fieldError">
     <span th:errors="*{detail}"></span>
     <br>
-    <label for="languages" th:text="#{label.set.required.languages}">Languages*:</label>
+    <label for="languages" th:text="#{label.set.languages.required}">Languages*:</label>
     <br>
     <select id="languages" name="languages" th:errorClass="fieldError">
         <option th:each="language : ${T(com.kibi.fiszki.enums.Language).values()}"
