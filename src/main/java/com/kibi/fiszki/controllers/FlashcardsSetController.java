@@ -16,6 +16,7 @@ import static com.kibi.fiszki.Constants.DEFAULT_PAGE;
 import static com.kibi.fiszki.Constants.DEFAULT_PAGE_SIZE;
 
 @Controller
+@RequestMapping("set")
 public class FlashcardsSetController {
     @Autowired
     FlashcardsSetService service;
@@ -51,7 +52,7 @@ public class FlashcardsSetController {
             return "set/add";
         }
         FlashcardsSet saved = service.save(set);
-        return "redirect:/" + saved.getId();
+        return "redirect:/set/" + saved.getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -70,7 +71,7 @@ public class FlashcardsSetController {
         }
         set.setId(id);
         FlashcardsSet saved = service.save(set);
-        return "redirect:/" + saved.getId();
+        return "redirect:/set/" + saved.getId();
     }
 
     @GetMapping("/delete/{id}")
@@ -78,6 +79,6 @@ public class FlashcardsSetController {
         FlashcardsSet set = service.getById(id)
                 .orElseThrow(EntityNotFoundException::new);
         service.delete(set);
-        return "redirect:/";
+        return "redirect:/set/";
     }
 }

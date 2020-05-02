@@ -21,9 +21,9 @@
     <input type="text" id="languages" name="languages" disabled th:value="*{languages}">
     <br>
     <br>
-    <a th:href="@{/edit/{id}(id=*{id})}"><button>Edit</button></a>
-    <a th:href="@{/delete/{id}(id=*{id})}"><button>Delete</button></a>
-    <a th:href="@{/}"><button>Back</button></a>
+    <a th:href="@{/set/edit/{id}(id=*{id})}"><button>Edit</button></a>
+    <a th:href="@{/set/delete/{id}(id=*{id})}"><button>Delete</button></a>
+    <a th:href="@{/set/}"><button>Back</button></a>
     <br>
     <br>
 
@@ -50,7 +50,7 @@
             <td th:text="${flashcard.leftSide}">Left side</td>
             <td th:text="${flashcard.rightSide}">Right side</td>
             <td>
-                <a th:href="@{flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
+                <a th:href="@{/flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
                 <a th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">Delete</a>
             </td>
         </tr>

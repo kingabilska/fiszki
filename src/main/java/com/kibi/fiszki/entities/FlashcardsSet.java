@@ -19,10 +19,10 @@ public class FlashcardsSet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "{error.notblank}")
     private String title;
     private String detail;
-    @NotNull
+    @NotNull(message = "{error.notnull}")
     private Language languages;
 
     @OneToMany(mappedBy = "flashcardsSet", cascade = CascadeType.ALL)

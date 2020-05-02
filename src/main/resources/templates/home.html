@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect">
+<head>
+    <title>Home page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+<a href="/login" sec:authorize="!isAuthenticated()">Login</a>
+<div sec:authorize="isAuthenticated()">
+    <span th:text="${'Hello ' + #strings.capitalize(#authentication.getName())}"></span>
+    <a href="/set">Sets</a>
+    <a href="/logout">Logout</a>
+</div>
+<h3>Home page</h3>
+</body>
+</html>

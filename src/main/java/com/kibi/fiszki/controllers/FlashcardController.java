@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 
-@RequestMapping(value="flashcard")
 @Controller
+@RequestMapping("flashcard")
 public class FlashcardController {
     @Autowired
     FlashcardService service;
@@ -24,7 +24,7 @@ public class FlashcardController {
     @PostMapping("/add")
     public String add(@ModelAttribute Flashcard flashcard) {
         Flashcard saved = service.save(flashcard);
-        return "redirect:/" + saved.getFlashcardsSet().getId();
+        return "redirect:/set/" + saved.getFlashcardsSet().getId();
     }
 
     @GetMapping("/edit/{id}")
@@ -39,7 +39,7 @@ public class FlashcardController {
     public String edit(@PathVariable Long id, @ModelAttribute Flashcard flashcard) {
         flashcard.setId(id);
         Flashcard saved = service.save(flashcard);
-        return "redirect:/" + saved.getFlashcardsSet().getId();
+        return "redirect:/set/" + saved.getFlashcardsSet().getId();
     }
 
     @GetMapping("/delete/{id}")
@@ -47,6 +47,6 @@ public class FlashcardController {
         Flashcard flashcard = service.getById(id)
                 .orElseThrow(EntityNotFoundException::new);
         service.delete(flashcard);
-        return "redirect:/" + flashcard.getFlashcardsSet().getId();
+        return "redirect:/set/" + flashcard.getFlashcardsSet().getId();
     }
 }
