@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="#{title.add.set}">Add Set</title>
+    <title th:text="#{link.add.set}">Add Set</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
-<h3 th:text="#{title.add.set}">Add Set</h3>
+<h3 th:text="#{link.add.set}">Add Set</h3>
 <form method="post" th:object="${set}">
     <label for="title" th:text="#{label.set.title.required}">Title*:</label>
     <br>
@@ -21,6 +21,7 @@
     <label for="languages" th:text="#{label.set.languages.required}">Languages*:</label>
     <br>
     <select id="languages" name="languages" th:errorClass="fieldError">
+        <option value=""> - </option>
         <option th:each="language : ${T(com.kibi.fiszki.enums.Language).values()}"
                 th:value="${language}"
                 th:text="${language}" </option>

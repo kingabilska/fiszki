@@ -1,26 +1,28 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Add Flashcard</title>
+    <title th:text="#{title.add.flashcard}">Add Flashcard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
-<h3>Add Flashcard</h3>
-<form method="post" action="/flashcard/add">
+<h3 th:text="#{title.add.flashcard}">Add Flashcard</h3>
+<form method="post" th:object="${flashcard}" action="/flashcard/add">
     <input type="hidden" id="flashcardsSet" name="flashcardsSet" th:value="${setId}">
-    <label for="leftSide">Left side:</label>
+    <label th:text="#{label.left}" for="leftSide">Left side:</label>
     <br>
-    <input type="text" id="leftSide" name="leftSide">
+    <input type="text" id="leftSide" name="leftSide" th:value="*{leftSide}" th:errorClass="fieldError">
+    <span th:errors="*{leftSide}"></span>
     <br>
-    <label for="rightSide">Right side:</label>
+    <label th:text="#{label.right}" for="rightSide">Right side:</label>
     <br>
-    <input type="text" id="rightSide" name="rightSide">
+    <input type="text" id="rightSide" name="rightSide" th:value="*{rightSide}" th:errorClass="fieldError">
+    <span th:errors="*{rightSide}"></span>
     <br>
     <br>
-    <input type="submit" value="Save">
+    <input type="submit" value="Save" th:value="#{button.save}">
     <a th:href="@{/set/{id}(id=${setId})}">
-        <button type="button">Back</button>
+        <button th:text="#{button.back}" type="button">Back</button>
     </a>
 </form>
 </body>

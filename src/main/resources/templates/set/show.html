@@ -1,35 +1,36 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Manage Flashcards Sets</title>
+    <title th:text="#{title.set}">Manage Flashcards Sets</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
 <a th:href="@{/home}">Home</a>
-<h3>Manage Flashcards Sets</h3>
+<h3 th:text="#{title.set}">Manage Flashcards Sets</h3>
 <table border="1">
     <thead>
     <tr>
-        <th colspan="3">Flashcard sets</th>
-        <th><a th:href="@{/set/add}">Add</a></th>
+        <th th:text="#{table.set.th1}" colspan="3">Flashcard sets</th>
+        <th><a th:text="#{button.add}" th:href="@{/set/add}">Add</a></th>
     </tr>
     <tr th:if="*{#lists.isEmpty(page.content)}">
-        <th colspan="4">No Flashcards Available</th>
+        <th th:text="#{table.set0}" colspan="4">No Sets Available</th>
     </tr>
     <tr th:unless="*{#lists.isEmpty(page.content)}">
         <th>#</th>
-        <th>Title</th>
-        <th>Languages</th>
-        <th>Action</th>
+        <th th:text="#{label.set.title.required}">Title</th>
+        <th th:text="#{label.set.languages.required}">Languages</th>
+        <th th:text="#{title.show.set.action}">Action</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="set : ${page.content}">
-        <td th:text="${setStat.index} + ${shift} +1"</td>
+        <td th:text="${setStat.index} + ${page.number} * ${page.size} + 1">
+        </td>
         <td th:text="${set.title}">Title</td>
         <td th:text="${set.languages}">Languages</td>
-        <td><a th:href="@{/set/{id}(id=${set.id})}">Show</a></td>
+        <td><a th:text="#{title.show.set.show}" th:href="@{/set/{id}(id=${set.id})}">Show</a></td>
     </tr>
     </tbody>
 </table>

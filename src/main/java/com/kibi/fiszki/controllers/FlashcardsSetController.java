@@ -26,9 +26,7 @@ public class FlashcardsSetController {
                          @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) Integer size,
                          Model model) {
         Page<FlashcardsSet> pageSet = service.getAll(page, size);
-        int shift = page * size;
         model.addAttribute("page", pageSet);
-        model.addAttribute("shift", shift);
         return "set/show";
     }
 

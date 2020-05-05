@@ -5,9 +5,11 @@ import com.kibi.fiszki.services.FlashcardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("flashcard")
@@ -17,12 +19,17 @@ public class FlashcardController {
 
     @GetMapping("/add/{id}")
     public String add(@PathVariable Long id, Model model) {
+        model.addAttribute("flashcard", new Flashcard());
         model.addAttribute("setId", id);
         return "flashcard/add";
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute Flashcard flashcard) {
+    public String add(@Valid @ModelAttribute("flashcard") Flashcard flashcard, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("setId", flashcard.getFlashcardsSet().getId());
+            return "flashcard/add";
+        }
         Flashcard saved = service.save(flashcard);
         return "redirect:/set/" + saved.getFlashcardsSet().getId();
     }
@@ -36,7 +43,10 @@ public class FlashcardController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, @ModelAttribute Flashcard flashcard) {
+    public String edit(@PathVariable Long id, @Valid @ModelAttribute("flashcard") Flashcard flashcard, BindingResult result) {
+        if (result.hasErrors()) {
+            return "flashcard/edit";
+        }
         flashcard.setId(id);
         Flashcard saved = service.save(flashcard);
         return "redirect:/set/" + saved.getFlashcardsSet().getId();

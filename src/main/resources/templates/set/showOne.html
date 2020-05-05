@@ -1,48 +1,48 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>View Set</title>
+    <title th:text="#{title.setOne}">View Set</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
-<h3>View Set</h3>
+<h3 th:text="#{title.setOne}">View Set</h3>
 <div th:object="${set}">
-    <label for="title">Title:</label>
+    <label for="title" th:text="#{label.set.title.required}">Title:</label>
     <br>
     <input type="text" id="title" name="title" disabled th:value="*{title}">
     <br>
-    <label for="detail">Detail:</label>
+    <label for="detail" th:text="#{label.set.detail}">Detail:</label>
     <br>
     <input type="text" id="detail" name="detail" disabled th:value="*{detail}">
     <br>
-    <label for="languages">Languages:</label>
+    <label for="languages" th:text="#{label.set.languages.required}">Languages:</label>
     <br>
     <input type="text" id="languages" name="languages" disabled th:value="*{languages}">
     <br>
     <br>
-    <a th:href="@{/set/edit/{id}(id=*{id})}"><button>Edit</button></a>
-    <a th:href="@{/set/delete/{id}(id=*{id})}"><button>Delete</button></a>
-    <a th:href="@{/set/}"><button>Back</button></a>
+    <a th:href="@{/set/edit/{id}(id=*{id})}"><button th:text="#{button.edit}">Edit</button></a>
+    <a th:href="@{/set/delete/{id}(id=*{id})}"><button th:text="#{button.delete}">Delete</button></a>
+    <a th:href="@{/set}"><button th:text="#{button.back}">Back</button></a>
     <br>
     <br>
 
     <table border="1">
         <thead>
         <tr>
-            <th style="border: 0">Flashcards</th>
+            <th th:text="#{table.showOne.th1}" style="border: 0">Flashcards</th>
             <th style="opacity: 0"></th>
             <th style="border: 0"><a th:href="@{/flashcard/add/{id}(id=*{id})}">
-                <button>Add</button>
+                <button  th:text="#{button.add}">Add</button>
             </a></th>
         </tr>
         <tr th:if="*{#lists.isEmpty(flashcards)}">
-            <th colspan="4">No Flashcards Available</th>
+            <th th:text="#{table.showOne0}" colspan="4">No Flashcards Available</th>
         </tr>
         <tr th:unless="*{#lists.isEmpty(flashcards)}">
-            <th>Left side</th>
-            <th>Right side</th>
-            <th>Actions</th>
+            <th  th:text="#{label.left}">Left side</th>
+            <th th:text="#{label.right}">Right side</th>
+            <th th:text="#{table.showOne.actions}">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -50,8 +50,8 @@
             <td th:text="${flashcard.leftSide}">Left side</td>
             <td th:text="${flashcard.rightSide}">Right side</td>
             <td>
-                <a th:href="@{/flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
-                <a th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">Delete</a>
+                <a th:text="#{button.edit}" th:href="@{/flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
+                <a th:text="#{button.delete}" th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">Delete</a>
             </td>
         </tr>
         </tbody>
