@@ -3,7 +3,13 @@
 <head>
     <title th:text="#{title.edit.set}">Edit Set</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <!-- JS -->
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
 <h3 th:text="#{title.edit.set}">Edit Set</h3>
@@ -13,7 +19,7 @@
     <input type="text" id="title" name="title" th:value="*{title}" th:errorClass="fieldError">
     <span th:errors="*{title}"></span>
     <br>
-    <label for="detail" th:text="#{label.set.detail}">Detail:</label>
+    <label for="detail" th:text="#{label.set.detail}">Details:</label>
     <br>
     <input type="text" id="detail" name="detail" th:value="*{detail}" th:errorClass="fieldError">
     <span th:errors="*{detail}"></span>
@@ -22,8 +28,7 @@
     <br>
     <select id="languages" name="languages" th:errorClass="fieldError">
         <option th:each="language : ${T(com.kibi.fiszki.enums.Language).values()}"
-                th:value="${language}"
-                th:text="${language}"
+                th:value="${language}" th:text="${language}"
                 th:selected="${language} == *{languages}"></option>
     </select>
     <span th:errors="*{languages}"></span>

@@ -3,7 +3,13 @@
 <head>
     <title th:text="#{title.edit.flashcard}">Edit Flashcard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <!-- JS -->
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
 <h3 th:text="#{title.edit.flashcard}">Edit Flashcard</h3>
@@ -11,14 +17,16 @@
     <input type="hidden" id="flashcardsSet" name="flashcardsSet" th:value="*{flashcardsSet.id}">
     <label th:text="#{label.left}" for="leftSide">Left side:</label>
     <br>
-    <input type="text" id="leftSide" name="leftSide" th:value="*{leftSide}">
+    <input type="text" id="leftSide" name="leftSide" th:value="*{leftSide}" th:errorClass="fieldError">
+    <span th:errors="*{leftSide}"></span>
     <br>
     <label th:text="#{label.right}" for="rightSide">Right side:</label>
     <br>
-    <input type="text" id="rightSide" name="rightSide" th:value="*{rightSide}">
+    <input type="text" id="rightSide" name="rightSide" th:value="*{rightSide}" th:errorClass="fieldError">
+    <span th:errors="*{rightSide}"></span>
     <br>
     <br>
-    <input type="submit" value="Save"  th:value="#{button.save}" >
+    <input type="submit" value="Save" th:value="#{button.save}">
     <a th:href="@{/set/{id}(id=*{flashcardsSet.id})}">
         <button th:text="#{button.back}" type="button">Back</button>
     </a>
