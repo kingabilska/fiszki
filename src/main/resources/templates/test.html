@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <!-- JS -->
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/test.js"></script>
+</head>
+<body>
+<a href="/set">Sets</a>
+<h3 th:text="#{title.test}">Check yourself!</h3>
+
+<div id="test">
+    <div><span th:text="#{test.title}"></span><span id="title"></span></div>
+    <div><span th:text="#{test.languages}"></span><span id="languages"></span></div>
+    <div><span th:text="#{test.progress}"></span><span id="progress"></span></div>
+    <div>
+        <span th:text="#{test.side}">
+        </span><span id="leftSideLabel" th:text="#{test.side.left}"></span>
+        </span><span id="rightSideLabel" th:text="#{test.side.right}"></span>
+    </div>
+    <div id="leftSide" class="flashcard"></div>
+    <div id="rightSide" class="flashcard"></div>
+    <button id="memorized">&#10004;</button>
+    <button id="forgotten">&#10006;</button>
+</div>
+<div id="summary">
+    <div id="congratulations" th:text="#{test.congratulations}"></div>
+    <div id="reprimand" th:text="#{test.you.fucked.up}"></div>
+    <div><span th:text="#{test.memorized}"></span><span id="sumMemorized"></span></div>
+    <div><span th:text="#{test.forgotten}"></span><span id="sumForgotten"></span></div>
+    <div><span th:text="#{test.all.flashcards}"></span><span id="allFlashcards"></span></div>
+    <button id="reset" th:text="#{button.reset}">Reset</button>
+</div>
+
+<br>
+<a th:href="@{/set/{id}(id=${setId})}">
+    <button type="button" th:text="#{button.back}">Back</button>
+</a>
+
+</body>
+</html>

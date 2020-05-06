@@ -1,5 +1,6 @@
 package com.kibi.fiszki.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ public class Flashcard {
     @NotBlank
     private String rightSide;
 
+    @JsonIgnore
     @ManyToOne
     private FlashcardsSet flashcardsSet;
 }

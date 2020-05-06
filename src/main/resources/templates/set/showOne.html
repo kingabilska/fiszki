@@ -27,6 +27,7 @@
     <input type="text" id="languages" name="languages" disabled th:value="*{languages}">
     <br>
     <br>
+    <a th:href="@{/test/{id}(id=*{id})}"><button>Test</button></a>
     <a th:href="@{/set/edit/{id}(id=*{id})}"><button th:text="#{button.edit}">Edit</button></a>
     <a th:href="@{/set/delete/{id}(id=*{id})}"><button th:text="#{button.delete}">Delete</button></a>
     <a th:href="@{/set}"><button th:text="#{button.back}">Back</button></a>
