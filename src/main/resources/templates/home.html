@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect">
+<html xmlns:sec="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect">
 <head>
     <title>Home page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -11,13 +11,62 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </head>
-<body>
-<a href="/login" sec:authorize="!isAuthenticated()">Login</a>
-<div sec:authorize="isAuthenticated()">
-    <span th:text="${'Hello ' + #strings.capitalize(#authentication.getName())}"></span>
-    <a href="/set">Sets</a>
-    <a href="/logout">Logout</a>
+<body class="pb-5">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="/images/logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/set">Sets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Learning zone</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#">Creating zone</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#">Your profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Find friends</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <p class="text-justify bg-light-blue border-div w-75 mx-auto pt-3 pb-3 pl-4 pr-4">
+                Znużony czytaniem nudnych podręczników? Musisz szybko przyswoić zwroty w języku obcym przed sprawdzianem
+                lub wyjazdem? Pragniesz poznać ciekawych ludzi zza granicy? Nie zamierzasz wydawać bajońskich sum na
+                szkoły językowe? A może po prostu chcesz produktywnie spędzić czas i połączyć rozrywkę oraz naukę?
+                Przyjemna, skuteczna, a co niemniej ważne - bezpłatna metoda nauki poprzez fiszki sprawdzi się wielu
+                sytuacjach. Koniecznie sprawdź to osobiście!
+            </p>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <img class="w-100" src="/images/person-home.jpg">
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 </div>
-<h3>Home page</h3>
 </body>
 </html>

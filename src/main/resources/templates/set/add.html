@@ -11,33 +11,84 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </head>
-<body>
-<h3 th:text="#{title.add.set}">Add Set</h3>
-<form method="post" th:object="${set}">
-    <label for="title" th:text="#{label.set.title.required}">Title*:</label>
+<body class="pb-5">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" th:href="@{/home}">
+            <img src="/images/logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/set">Sets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Learning zone</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#">Creating zone</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#">Your profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Find friends</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <br>
-    <input type="text" id="title" name="title" th:value="*{title}" th:errorClass="fieldError">
-    <span th:errors="*{title}"></span>
-    <br>
-    <label for="detail" th:text="#{label.set.detail}">Details:</label>
-    <br>
-    <input type="text" id="detail" name="detail" th:value="*{detail}" th:errorClass="fieldError">
-    <span th:errors="*{detail}"></span>
-    <br>
-    <label for="languages" th:text="#{label.set.languages.required}">Languages*:</label>
-    <br>
-    <select id="languages" name="languages" th:errorClass="fieldError">
-        <option value=""> - </option>
-        <option th:each="language : ${T(com.kibi.fiszki.enums.Language).values()}"
-                th:value="${language}" th:text="${language}"></option>
-    </select>
-    <span th:errors="*{languages}"></span>
-    <br>
-    <br>
-    <input type="submit" value="Save" th:value="#{button.save}">
-    <a th:href="@{/set/}">
-        <button type="button" th:text="#{button.back}">Back</button>
-    </a>
-</form>
+    <div class="row">
+        <div class="col-md-12 mt-5 pl-0 pt-0">
+            <h3 th:text="#{title.add.set}">Add Set</h3>
+        </div>
+
+        <div class="col-md-6 d-block bg-light-blue">
+            <form method="post" th:object="${set}">
+                <div class="form-group">
+                    <label for="title" th:text="#{label.set.title.required}">Title*:</label>
+                    <input type="text" id="title" class="form-control" name="title" th:value="*{title}"
+                           th:errorClass="fieldError">
+                    <span th:errors="*{title}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="detail" th:text="#{label.set.detail}">Details:</label>
+                    <input type="text" id="detail" class="form-control" name="detail" th:value="*{detail}"
+                           th:errorClass="fieldError">
+                    <span th:errors="*{detail}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="languages" th:text="#{label.set.languages.required}">Languages*:</label>
+                    <select id="languages" class="form-control" name="languages" th:errorClass="fieldError">
+                        <option value=""> -</option>
+                        <option th:each="language : ${T(com.kibi.fiszki.enums.Language).values()}"
+                                th:value="${language}" th:text="${language}"></option>
+                    </select>
+                    <span th:errors="*{languages}"></span>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary" th:value="#{button.save}">Save</button>
+                    <a th:href="@{/set/}">
+                        <button class="btn btn-default" type="button" th:text="#{button.back}">Back</button>
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <img class="w-100 float-right d-block" src="/images/person-addSet.jpg">
+        </div>
 </body>
 </html>

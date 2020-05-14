@@ -1,12 +1,28 @@
+body, html {
+    background: #60d7f9;
+}
+
+.bg-light-blue {
+    background: #b0f3f9;
+}
+
+.border-div {
+    border: 2px solid #436d72;
+    border-radius: 14px;
+}
+
 .active {
     background-color: bisque;
 }
+
 .pagination > a {
     margin-right: 5px;
 }
+
 .fieldError {
     border: 2px solid red;
 }
+
 .flashcard {
     border: 2px black solid;
     cursor: pointer;
@@ -16,4 +32,8 @@
     display: flex;
     justify-content: center;
     user-select: none;
+}
+
+.navbar-brand img {
+    width: 65px;
 }

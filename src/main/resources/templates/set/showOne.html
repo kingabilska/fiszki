@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title th:text="#{title.setOne}">View Set</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -11,58 +11,116 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </head>
-<body>
-<h3 th:text="#{title.setOne}">View Set</h3>
-<div th:object="${set}">
-    <label for="title" th:text="#{label.set.title.required}">Title:</label>
-    <br>
-    <input type="text" id="title" name="title" disabled th:value="*{title}">
-    <br>
-    <label for="detail" th:text="#{label.set.detail}">Detail:</label>
-    <br>
-    <input type="text" id="detail" name="detail" disabled th:value="*{detail}">
-    <br>
-    <label for="languages" th:text="#{label.set.languages.required}">Languages:</label>
-    <br>
-    <input type="text" id="languages" name="languages" disabled th:value="*{languages}">
-    <br>
-    <br>
-    <a th:href="@{/test/{id}(id=*{id})}"><button>Test</button></a>
-    <a th:href="@{/set/edit/{id}(id=*{id})}"><button th:text="#{button.edit}">Edit</button></a>
-    <a th:href="@{/set/delete/{id}(id=*{id})}"><button th:text="#{button.delete}">Delete</button></a>
-    <a th:href="@{/set}"><button th:text="#{button.back}">Back</button></a>
-    <br>
-    <br>
+<body class="pb-5">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" th:href="@{/home}">
+            <img src="/images/logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/set">Sets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Learning zone</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#">Creating zone</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#">Your profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Find friends</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <table border="1">
-        <thead>
-        <tr>
-            <th th:text="#{table.showOne.th1}" style="border: 0">Flashcards</th>
-            <th style="opacity: 0"></th>
-            <th style="border: 0"><a th:href="@{/flashcard/add/{id}(id=*{id})}">
-                <button  th:text="#{button.add}">Add</button>
-            </a></th>
-        </tr>
-        <tr th:if="*{#lists.isEmpty(flashcards)}">
-            <th th:text="#{table.showOne0}" colspan="4">No Flashcards Available</th>
-        </tr>
-        <tr th:unless="*{#lists.isEmpty(flashcards)}">
-            <th  th:text="#{label.left}">Left side</th>
-            <th th:text="#{label.right}">Right side</th>
-            <th th:text="#{table.showOne.actions}">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="flashcard : *{flashcards}">
-            <td th:text="${flashcard.leftSide}">Left side</td>
-            <td th:text="${flashcard.rightSide}">Right side</td>
-            <td>
-                <a th:text="#{button.edit}" th:href="@{/flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
-                <a th:text="#{button.delete}" th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-12 mt-5 pl-0 pt-0">
+            <h3 th:text="#{title.setOne}">View Set</h3>
+        </div>
+        <br>
+        <div class="col-md-6 d-block bg-light-blue">
+            <div th:object="${set}">
+                <div class="form-group">
+                    <label for="title" th:text="#{label.set.title.required}">Title:</label>
+                    <input class="form-control" type="text" id="title" name="title" disabled th:value="*{title}">
+                </div>
+                <div class="form-group">
+                    <label for="detail" th:text="#{label.set.detail}">Detail:</label>
+                    <input class="form-control" type="text" id="detail" name="detail" disabled th:value="*{detail}">
+                </div>
+                <div class="form-group">
+                    <label for="languages" th:text="#{label.set.languages.required}">Languages:</label>
+                    <input class="form-control" type="text" id="languages" name="languages" disabled
+                           th:value="*{languages}">
+                </div>
+                <div class="d-flex justify-content-center mb-5">
+                    <a th:href="@{/test/{id}(id=*{id})}">
+                        <button class="btn btn-primary mr-1 ml-1">Test</button>
+                    </a>
+                    <a th:href="@{/set/edit/{id}(id=*{id})}">
+                        <button class="btn btn-primary mr-1 ml-1" th:text="#{button.edit}">Edit</button>
+                    </a>
+                    <a th:href="@{/set/delete/{id}(id=*{id})}">
+                        <button class="btn btn-primary mr-1 ml-1" th:text="#{button.delete}">Delete</button>
+                    </a>
+                    <a th:href="@{/set}">
+                        <button class="btn btn-primary mr-1 ml-1" th:text="#{button.back}">Back</button>
+                    </a>
+                </div>
+            </div>
+            <table class="table table-stripped w-100">
+                <thead>
+                <tr>
+                    <th class="text-center" th:text="#{table.showOne.th1}" style="border: 0">Flashcards</th>
+                    <th style="opacity: 0"></th>
+                    <th style="border: 0"><a th:href="@{/flashcard/add/{id}(id=*{id})}">
+                        <button th:text="#{button.add}">Add</button>
+                    </a></th>
+                </tr>
+                <tr th:if="*{#lists.isEmpty(flashcards)}">
+                    <th class="text-center" th:text="#{table.showOne0}" colspan="4">No Flashcards Available</th>
+                </tr>
+                <tr th:unless="*{#lists.isEmpty(flashcards)}">
+                    <th th:text="#{label.left}">Left side</th>
+                    <th th:text="#{label.right}">Right side</th>
+                    <th th:text="#{table.showOne.actions}">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="flashcard : *{flashcards}">
+                    <td th:text="${flashcard.leftSide}">Left side</td>
+                    <td th:text="${flashcard.rightSide}">Right side</td>
+                    <td>
+                        <a th:text="#{button.edit}"
+                           th:href="@{/flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
+                        <a th:text="#{button.delete}" th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <img class="w-100 float-right d-block" src="/images/person-oneSet.jpg">
+        </div>
+    </div>
 </div>
 </body>
 </html>
