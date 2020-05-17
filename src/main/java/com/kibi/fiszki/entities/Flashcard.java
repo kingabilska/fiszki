@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "flashcards")
 public class Flashcard {
 
     @Id
