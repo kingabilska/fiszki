@@ -13,7 +13,8 @@
 </head>
 <body>
 <h3 th:text="#{title.edit.flashcard}">Edit Flashcard</h3>
-<form method="post" th:object="${flashcard}">
+<form method="post" action="/flashcard/edit" th:object="${flashcard}">
+    <input type="hidden" id="id" name="id" th:value="*{id}">
     <input type="hidden" id="flashcardsSet" name="flashcardsSet" th:value="*{flashcardsSet.id}">
     <label th:text="#{label.left}" for="leftSide">Left side:</label>
     <br>

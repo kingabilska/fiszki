@@ -4,6 +4,8 @@ import com.kibi.fiszki.entities.FlashcardsSet;
 import com.kibi.fiszki.services.FlashcardsSetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
-import static com.kibi.fiszki.Constants.DEFAULT_PAGE;
-import static com.kibi.fiszki.Constants.DEFAULT_PAGE_SIZE;
+import static com.kibi.fiszki.Constants.DEFAULT_SORT_FIELD;
+import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @Controller
 @RequestMapping("set")
@@ -23,10 +25,9 @@ public class FlashcardsSetController {
     FlashcardsSetService service;
 
     @GetMapping
-    public String getAll(@RequestParam(defaultValue = DEFAULT_PAGE) Integer page,
-                         @RequestParam(defaultValue = DEFAULT_PAGE_SIZE) Integer size,
+    public String getAll(@SortDefault(sort = DEFAULT_SORT_FIELD, direction = DESC) Pageable pageable,
                          Model model) {
-        Page<FlashcardsSet> pageSet = service.getAll(page, size);
+        Page<FlashcardsSet> pageSet = service.getAll(pageable);
         model.addAttribute("page", pageSet);
         return "set/show";
     }
@@ -70,13 +71,11 @@ public class FlashcardsSetController {
         return "set/edit";
     }
 
-    @PostMapping("/edit/{id}")
-    public String edit(@PathVariable Long id,
-                       @Valid @ModelAttribute("set") FlashcardsSet set, BindingResult result) {
+    @PostMapping("/edit")
+    public String edit(@Valid @ModelAttribute("set") FlashcardsSet set, BindingResult result) {
         if (result.hasErrors()) {
             return "set/edit";
         }
-        set.setId(id);
         FlashcardsSet saved = service.save(set);
         return "redirect:/set/" + saved.getId();
     }

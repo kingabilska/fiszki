@@ -56,7 +56,8 @@
         </div>
         <br>
         <div class="col-md-6 d-block bg-light-blue">
-            <form method="post" th:object="${set}">
+            <form method="post" action="/set/edit" th:object="${set}">
+                <input type="hidden" name="id" th:value="*{id}">
                 <div class="form-group">
                     <label for="title" th:text="#{label.set.title.required}">Title*:</label>
                     <input class="form-control" type="text" id="title" name="title" th:value="*{title}"

@@ -42,12 +42,11 @@ public class FlashcardController {
         return "flashcard/edit";
     }
 
-    @PostMapping("/edit/{id}")
-    public String edit(@PathVariable Long id, @Valid @ModelAttribute("flashcard") Flashcard flashcard, BindingResult result) {
+    @PostMapping("/edit")
+    public String edit(@Valid @ModelAttribute("flashcard") Flashcard flashcard, BindingResult result) {
         if (result.hasErrors()) {
             return "flashcard/edit";
         }
-        flashcard.setId(id);
         Flashcard saved = service.save(flashcard);
         return "redirect:/set/" + saved.getFlashcardsSet().getId();
     }

@@ -10,6 +10,7 @@
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
 </head>
 <body class="pb-5">
 <div class="container">
@@ -60,25 +61,26 @@
             <table class="table table-stripped">
                 <thead>
                 <tr>
-                    <th class="text-center" th:text="#{table.set.th1}" colspan="3">Flashcard sets</th>
+                    <th class="text-center" th:text="#{table.set.th1}" colspan="4">Flashcard sets</th>
                     <th><a th:text="#{button.add}" th:href="@{/set/add}">Add</a></th>
                 </tr>
                 <tr th:if="*{#lists.isEmpty(page.content)}">
-                    <th th:text="#{table.set0}" colspan="4">No Sets Available</th>
+                    <th th:text="#{table.set0}" colspan="5">No Sets Available</th>
                 </tr>
                 <tr th:unless="*{#lists.isEmpty(page.content)}">
                     <th>#</th>
                     <th th:text="#{label.set.title.required}">Title</th>
                     <th th:text="#{label.set.languages.required}">Languages</th>
+                    <th th:text="#{title.show.set.create.date}">Created date</th>
                     <th th:text="#{title.show.set.action}">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="set : ${page.content}">
-                    <td th:text="${setStat.index} + ${page.number} * ${page.size} + 1">
-                    </td>
+                    <td th:text="${setStat.index} + ${page.number} * ${page.size} + 1"></td>
                     <td th:text="${set.title}">Title</td>
                     <td th:text="${set.languages}">Languages</td>
+                    <td th:text="${#dates.format(set.createdDate, 'yyyy-MM-dd HH:mm')}">Created date</td>
                     <td><a th:text="#{title.show.set.show}" th:href="@{/set/{id}(id=${set.id})}">Show</a></td>
                 </tr>
                 </tbody>
@@ -88,13 +90,17 @@
             <img class="w-100 float-right d-block" src="/images/person-sets.jpg">
         </div>
         <div class="col-md-12">
-        <span class="mx-auto d-block pagination" th:if="${page.totalPages > 1}">
-        <a th:each="pageNumber : ${#numbers.sequence(1, page.totalPages)}"
-           th:href="@{/set/(page=${pageNumber - 1}, size=${page.size})}"
-           th:text="${pageNumber}"
-           th:class="${page.number + 1 == pageNumber} ? active"></a>
-        </span>
+            <span class="mx-auto d-block pagination" th:if="${page.totalPages > 1}">
+                <a th:each="pageNumber : ${#numbers.sequence(1, page.totalPages)}"
+                   th:href="@{/set/(page=${pageNumber - 1}, size=${page.size})}"
+                   th:text="${pageNumber}"
+                   th:class="${page.number + 1 == pageNumber} ? active"></a>
+            </span>
         </div>
+        <select id="pageSizeSelector">
+            <option th:each="val : ${#numbers.sequence(5, 15, 5)}"
+                    th:value="${val}" th:text="${val}" th:selected="${val == page.size}"></option>
+        </select>
     </div>
 </div>
 </body>

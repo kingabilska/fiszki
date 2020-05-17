@@ -4,7 +4,9 @@ import com.kibi.fiszki.enums.Language;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -13,11 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity(name = "flashcards_sets")
-public class FlashcardsSet {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class FlashcardsSet extends AbstractEntity {
 
     @NotBlank(message = "{error.notblank}")
     private String title;
@@ -25,6 +23,6 @@ public class FlashcardsSet {
     @NotNull(message = "{error.notnull}")
     private Language languages;
 
-    @OneToMany(mappedBy = "flashcardsSet", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "flashcardsSet", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Flashcard> flashcards = new HashSet<>();
 }
