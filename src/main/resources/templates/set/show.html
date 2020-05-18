@@ -15,7 +15,7 @@
 <body class="pb-5">
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" th:href="@{/home}">
+        <a class="navbar-brand" href="#">
             <img src="/images/logo.png">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -25,33 +25,32 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/set">Sets</a>
+                    <a class="nav-link" href="/set" th:text="#{navbar.sets}">Sets</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Learning zone</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.learningZone}">Learning zone</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="#">Creating zone</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.creatingZone}">Creating zone</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="#">Your profile</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.yourProfile}">Your profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Find friends</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.findFriends}">Find friends</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.contact}">Contact</a>
                 </li>
                 <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/login" th:text="#{navbar.loggingIn}">Login</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/logout" th:text="#{navbar.loggingOut}">Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
-
     <div class="row">
         <div class="col-md-12 mt-5 pl-0 pt-0">
             <h3 th:text="#{title.set}">Manage Flashcards Sets</h3>
@@ -79,7 +78,7 @@
                 <tr th:each="set : ${page.content}">
                     <td th:text="${setStat.index} + ${page.number} * ${page.size} + 1"></td>
                     <td th:text="${set.title}">Title</td>
-                    <td th:text="${set.languages}">Languages</td>
+                    <td th:text="#{'language.' + ${set.languages}}">Languages</td>
                     <td th:text="${#dates.format(set.createdDate, 'yyyy-MM-dd HH:mm')}">Created date</td>
                     <td><a th:text="#{title.show.set.show}" th:href="@{/set/{id}(id=${set.id})}">Show</a></td>
                 </tr>

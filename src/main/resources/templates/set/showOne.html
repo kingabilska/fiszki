@@ -14,7 +14,7 @@
 <body class="pb-5">
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" th:href="@{/home}">
+        <a class="navbar-brand" href="#">
             <img src="/images/logo.png">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -24,33 +24,32 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/set">Sets</a>
+                    <a class="nav-link" href="/set" th:text="#{navbar.sets}">Sets</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Learning zone</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.learningZone}">Learning zone</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="#">Creating zone</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.creatingZone}">Creating zone</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="#">Your profile</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.yourProfile}">Your profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Find friends</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.findFriends}">Find friends</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="#" th:text="#{navbar.contact}">Contact</a>
                 </li>
                 <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/login" th:text="#{navbar.loggingIn}">Login</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" href="/logout">Logout</a>
+                    <a class="nav-link" href="/logout" th:text="#{navbar.loggingOut}">Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
-
     <div class="row">
         <div class="col-md-12 mt-5 pl-0 pt-0">
             <h3 th:text="#{title.setOne}">View Set</h3>
@@ -69,7 +68,7 @@
                 <div class="form-group">
                     <label for="languages" th:text="#{label.set.languages.required}">Languages:</label>
                     <input class="form-control" type="text" id="languages" name="languages" disabled
-                           th:value="*{languages}">
+                           th:value="#{'language.' + *{languages}}">
                 </div>
                 <div class="d-flex justify-content-center mb-5">
                     <a th:href="@{/test/{id}(id=*{id})}">
@@ -85,40 +84,45 @@
                         <button class="btn btn-primary mr-1 ml-1" th:text="#{button.back}">Back</button>
                     </a>
                 </div>
+                <hr class="mb-1 mt-1">
+                <table class="table table-stripped w-100">
+                    <thead>
+                    <tr>
+                        <th class="text-center" th:text="#{table.showOne.th1}" style="border: 0">Flashcards</th>
+                        <th style="opacity: 0"></th>
+                        <th style="border: 0"><a th:href="@{/flashcard/add/{id}(id=*{id})}">
+                            <button th:text="#{button.add}">Add</button>
+                        </a></th>
+                    </tr>
+
+
+                    <tr th:if="*{#lists.isEmpty(flashcards)}">
+                        <th class="text-center" th:text="#{table.showOne0}" colspan="4">No Flashcards Available</th>
+                    </tr>
+                    <tr th:unless="*{#lists.isEmpty(flashcards)}">
+                        <th th:text="#{label.left}">Left side</th>
+                        <th th:text="#{label.right}">Right side</th>
+                        <th th:text="#{table.showOne.actions}">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="flashcard : *{flashcards}">
+                        <td th:text="${flashcard.leftSide}">Left side</td>
+                        <td th:text="${flashcard.rightSide}">Right side</td>
+                        <td>
+                            <a th:text="#{button.edit}"
+                               th:href="@{/flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
+                            <a th:text="#{button.delete}"
+                               th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <table class="table table-stripped w-100">
-                <thead>
-                <tr>
-                    <th class="text-center" th:text="#{table.showOne.th1}" style="border: 0">Flashcards</th>
-                    <th style="opacity: 0"></th>
-                    <th style="border: 0"><a th:href="@{/flashcard/add/{id}(id=*{id})}">
-                        <button th:text="#{button.add}">Add</button>
-                    </a></th>
-                </tr>
-                <tr th:if="*{#lists.isEmpty(flashcards)}">
-                    <th class="text-center" th:text="#{table.showOne0}" colspan="4">No Flashcards Available</th>
-                </tr>
-                <tr th:unless="*{#lists.isEmpty(flashcards)}">
-                    <th th:text="#{label.left}">Left side</th>
-                    <th th:text="#{label.right}">Right side</th>
-                    <th th:text="#{table.showOne.actions}">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="flashcard : *{flashcards}">
-                    <td th:text="${flashcard.leftSide}">Left side</td>
-                    <td th:text="${flashcard.rightSide}">Right side</td>
-                    <td>
-                        <a th:text="#{button.edit}"
-                           th:href="@{/flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
-                        <a th:text="#{button.delete}" th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">Delete</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+
         </div>
         <div class="col-md-6">
-            <img class="w-100 float-right d-block" src="/images/person-oneSet.jpg">
+            <img class="w-100 float-right d-block" src="/images/person-oneSet.jpg" alt="person with a hand on face">
         </div>
     </div>
 </div>

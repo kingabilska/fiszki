@@ -13,36 +13,80 @@
     <script src="/js/test.js"></script>
 </head>
 <body>
-<a href="/set">Sets</a>
-<h3 th:text="#{title.test}">Check yourself!</h3>
-
-<div id="test">
-    <div><span th:text="#{test.title}"></span><span id="title"></span></div>
-    <div><span th:text="#{test.languages}"></span><span id="languages"></span></div>
-    <div><span th:text="#{test.progress}"></span><span id="progress"></span></div>
-    <div>
+<body class="pb-5">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="/images/logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/set" th:text="#{navbar.sets}">Sets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:text="#{navbar.learningZone}">Learning zone</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#" th:text="#{navbar.creatingZone}">Creating zone</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#" th:text="#{navbar.yourProfile}">Your profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:text="#{navbar.findFriends}">Find friends</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:text="#{navbar.contact}">Contact</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login" th:text="#{navbar.loggingIn}">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout" th:text="#{navbar.loggingOut}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <div class="col-md-12 mt-5 pl-0 pt-0">
+                <a th:text="#{navbar.sets}" href="/set">Sets</a>
+                <h3 th:text="#{title.test}">Check yourself!</h3>
+            </div>
+            <div id="test">
+                <div><span th:text="#{test.title}"></span><span id="title"></span></div>
+                <div><span th:text="#{test.languages}"></span><span id="languages"></span></div>
+                <div><span th:text="#{test.progress}"></span><span id="progress"></span></div>
+                <div>
         <span th:text="#{test.side}">
         </span><span id="leftSideLabel" th:text="#{test.side.left}"></span>
-        </span><span id="rightSideLabel" th:text="#{test.side.right}"></span>
-    </div>
-    <div id="leftSide" class="flashcard"></div>
-    <div id="rightSide" class="flashcard"></div>
-    <button id="memorized">&#10004;</button>
-    <button id="forgotten">&#10006;</button>
-</div>
-<div id="summary">
-    <div id="congratulations" th:text="#{test.congratulations}"></div>
-    <div id="reprimand" th:text="#{test.you.fucked.up}"></div>
-    <div><span th:text="#{test.memorized}"></span><span id="sumMemorized"></span></div>
-    <div><span th:text="#{test.forgotten}"></span><span id="sumForgotten"></span></div>
-    <div><span th:text="#{test.all.flashcards}"></span><span id="allFlashcards"></span></div>
-    <button id="reset" th:text="#{button.reset}">Reset</button>
-</div>
-
-<br>
-<a th:href="@{/set/{id}(id=${setId})}">
-    <button type="button" th:text="#{button.back}">Back</button>
-</a>
-
+                    </span><span id="rightSideLabel" th:text="#{test.side.right}"></span>
+                </div>
+                <div id="leftSide" class="flashcard bg-white"></div>
+                <div id="rightSide" class="flashcard bg-white"></div>
+                <button id="memorized">&#10004;</button>
+                <button id="forgotten">&#10006;</button>
+            </div>
+            <div id="summary">
+                <div id="congratulations" th:text="#{test.congratulations}"></div>
+                <div id="reprimand" th:text="#{test.you.fucked.up}"></div>
+                <div><span th:text="#{test.memorized}"></span><span id="sumMemorized"></span></div>
+                <div><span th:text="#{test.forgotten}"></span><span id="sumForgotten"></span></div>
+                <div><span th:text="#{test.all.flashcards}"></span><span id="allFlashcards"></span></div>
+                <button id="reset" th:text="#{button.reset}">Reset</button>
+            </div>
+        </div>
+        <br>
+        <a th:href="@{/set/{id}(id=${setId})}">
+            <button type="button" th:text="#{button.back}">Back</button>
+        </a>
+        <div class="col-md-12">
+            <img class="w-100 d-block" src="/images/test.png">
+        </div>
 </body>
 </html>
