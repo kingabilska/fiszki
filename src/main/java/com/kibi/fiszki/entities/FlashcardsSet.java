@@ -22,6 +22,7 @@ public class FlashcardsSet extends AbstractEntity {
     private String detail;
     @NotNull(message = "{error.notnull}")
     private Language languages;
+    private String creator;
 
     @OneToMany(mappedBy = "flashcardsSet", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Flashcard> flashcards = new HashSet<>();

@@ -70,6 +70,17 @@
                     <input class="form-control" type="text" id="languages" name="languages" disabled
                            th:value="#{'language.' + *{languages}}">
                 </div>
+                <div class="form-group">
+                    <label for="languages" th:text="#{label.set.languages.creator}">Creator:</label>
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="creator" name="creator" disabled th:value="*{creator}">
+                        <span class="input-group-btn">
+                            <a th:href="@{/set(login=*{creator})}">
+                                <button class="btn btn-primary" type="button" th:text="#{button.creator}">See all user's sets</button>
+                            </a>
+                        </span>
+                    </div>
+                </div>
                 <div class="d-flex justify-content-center mb-5">
                     <a th:href="@{/test/{id}(id=*{id})}">
                         <button class="btn btn-primary mr-1 ml-1">Test</button>

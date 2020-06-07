@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.SortDefault;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,8 +28,13 @@ public class FlashcardsSetController {
 
     @GetMapping
     public String getAll(@SortDefault(sort = DEFAULT_SORT_FIELD, direction = DESC) Pageable pageable,
-                         Model model) {
-        Page<FlashcardsSet> pageSet = service.getAll(pageable);
+                         @RequestParam(required = false) String login, Model model) {
+        Page<FlashcardsSet> pageSet;
+        if (login != null) {
+            pageSet = service.getAllByCreator(login, pageable);
+        } else {
+            pageSet = service.getAll(pageable);
+        }
         model.addAttribute("page", pageSet);
         return "set/show";
     }
@@ -59,6 +66,8 @@ public class FlashcardsSetController {
         if (result.hasErrors()) {
             return "set/add";
         }
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        set.setCreator(user.getUsername());
         FlashcardsSet saved = service.save(set);
         return "redirect:/set/" + saved.getId();
     }

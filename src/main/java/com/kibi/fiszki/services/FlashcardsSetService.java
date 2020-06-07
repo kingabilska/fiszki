@@ -18,6 +18,10 @@ public class FlashcardsSetService {
         return repository.findAll(pageable);
     }
 
+    public Page<FlashcardsSet> getAllByCreator(String user, Pageable pageable) {
+        return repository.findAllByCreator(user, pageable);
+    }
+
     public Optional<FlashcardsSet> getById(Long id) {
         return repository.findById(id);
     }
