@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html xmlns:sec="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <!-- JS -->
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body class="pb-5">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/">
+            <img src="/images/logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/set" th:text="#{navbar.sets}">Sets</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="#" th:text="#{navbar.yourProfile}">Your profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:text="#{navbar.findFriends}">Find friends</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:text="#{navbar.contact}">Contact</a>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link" href="/login" th:text="#{navbar.loggingIn}">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" href="/logout" th:text="#{navbar.loggingOut}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="bg-light-blue border-div col-md-3">
+            <h4 class="mt-3 text-center"><span th:text="#{form.title.join.us}">Dołącz do nas</span> - <br><b th:text="#{form.title.register}">ZAREJESTRUJ SIĘ</b></h4>
+            <form action="/registration" method="post" autocomplete="off" th:object="${user}">
+                <div class="form-group">
+                    <label th:text="#{authentication.username}" for="regUsername">Username:</label>
+                    <input class="form-control" type="text" id="regUsername" name="username" required minlength="4" maxlength="16" autocomplete="off" th:value="*{username}">
+                    <span th:errors="*{username}"></span>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{authentication.password}" for="regPassword">Password:</label>
+                    <input class="form-control" type="password" id="regPassword" name="password" required minlength="8" maxlength="32" autocomplete="off">
+                    <span th:errors="*{password}"></span>
+                </div>
+                <div class="form-group">
+                    <label th:text="#{authentication.passwordConfirmation}" for="regPasswordConfirmation">Repeat the password:</label>
+                    <input class="form-control" type="password" id="regPasswordConfirmation" name="passwordConfirmation" required minlength="8" maxlength="32">
+                    <span th:errors="*{passwordConfirmation}"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mx-auto d-block" th:text="#{button.register}">Save</button>
+                </div>
+            </form>
+        </div>
+        <div class="mt-3 col-md-6">
+            <img class="w-100" src="/images/person-home.jpg">
+        </div>
+        <div class="bg-light-blue border-div col-md-3">
+            <h4 class="mt-5 text-center"><span th:text="#{form.title.have.account}">Masz już konto?</span><br><b th:text="#{form.title.login}">ZALOGUJ SIĘ</b></h4>
+            <form action="/authentication" method="post">
+                <div th:if="${loginError == true}" th:text="#{error.login}">error</div>
+                <div class="form-group">
+                    <label th:text="#{authentication.username}" for="username">Username:</label>
+                    <input class="form-control" type="text" id="username" name="username" required minlength="4">
+                </div>
+                <div class="form-group">
+                    <label th:text="#{authentication.password}" for="password">Password:</label>
+                    <input class="form-control" type="password" id="password" name="password" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mx-auto d-block" th:text="#{button.login}">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -37,3 +37,9 @@ body, html {
 .navbar-brand img {
     width: 65px;
 }
+
+h2 {
+    width: 100%;
+    font-size: 26px;
+    text-align: center;
+}

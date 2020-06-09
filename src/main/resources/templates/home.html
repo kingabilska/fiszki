@@ -43,7 +43,7 @@
                     <a class="nav-link" href="#" th:text="#{navbar.contact}">Contact</a>
                 </li>
                 <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <a class="nav-link" href="/login" th:text="#{navbar.loggingIn}">Login</a>
+                    <a class="nav-link" href="/authentication" th:text="#{navbar.loggingIn}">Login</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" href="/logout" th:text="#{navbar.loggingOut}">Logout</a>
@@ -61,27 +61,7 @@
                 sytuacjach. Koniecznie sprawdź to osobiście!
             </p>
         </div>
-        <div class="text-justify bg-light-blue border-div col-md-4 pt-2 offset-md-1">
-            <h4>Formularz rejestracyjny</h4>
-            <form action="/registration" method="post" autocomplete="off">
-                    <div class="form-group">
-                        <label th:text="#{registration.login}" for="login">Login:</label>
-                        <input class="form-control" type="text" id="login" name="login" required minlength="4" maxlength="16" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label th:text="#{registration.password}" for="password">Password:</label>
-                        <input class="form-control" type="password" id="password" name="password" required minlength="4" maxlength="16" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label th:text="#{registration.passwordConfirmation}" for="passwordConfirmation" >Repeat the password:</label>
-                        <input class="form-control" type="password" id="passwordConfirmation" name="passwordConfirmation" required minlength="4" maxlength="16">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary mx-auto d-block" th:text="#{button.save}">Save</button>
-                    </div>
-            </form>
-        </div>
-        <div class="col-md-6">
+        <div class="offset-md-2 col-md-8">
             <img class="w-100" src="/images/person-home.jpg">
         </div>
     </div>
