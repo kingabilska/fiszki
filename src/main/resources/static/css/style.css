@@ -11,14 +11,6 @@ body, html {
     border-radius: 14px;
 }
 
-.active {
-    background-color: bisque;
-}
-
-.pagination > a {
-    margin-right: 5px;
-}
-
 .fieldError {
     border: 2px solid red;
 }

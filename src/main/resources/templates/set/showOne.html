@@ -10,6 +10,7 @@
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js"></script>
 </head>
 <body class="pb-5">
 <div class="container">
@@ -101,39 +102,61 @@
                     <tr>
                         <th class="text-center" th:text="#{table.showOne.th1}" style="border: 0">Flashcards</th>
                         <th style="opacity: 0"></th>
-                        <th style="border: 0"><a th:href="@{/flashcard/add/{id}(id=*{id})}">
-                            <button th:text="#{button.add}">Add</button>
-                        </a></th>
+                        <th style="border: 0">
+                            <a th:href="@{/flashcard/add/{id}(id=*{id})}"><button th:text="#{button.add}">Add</button></a>
+                        </th>
                     </tr>
-
-
-                    <tr th:if="*{#lists.isEmpty(flashcards)}">
+                    <tr th:if="${#lists.isEmpty(flashcardsPage.content)}">
                         <th class="text-center" th:text="#{table.showOne0}" colspan="4">No Flashcards Available</th>
                     </tr>
-                    <tr th:unless="*{#lists.isEmpty(flashcards)}">
+                    <tr th:unless="${#lists.isEmpty(flashcardsPage.content)}">
                         <th th:text="#{label.left}">Left side</th>
                         <th th:text="#{label.right}">Right side</th>
                         <th th:text="#{table.showOne.actions}">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="flashcard : *{flashcards}">
+                    <tr th:each="flashcard : ${flashcardsPage.content}">
                         <td th:text="${flashcard.leftSide}">Left side</td>
                         <td th:text="${flashcard.rightSide}">Right side</td>
                         <td>
-                            <a th:text="#{button.edit}"
-                               th:href="@{/flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
-                            <a th:text="#{button.delete}"
-                               th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">Delete</a>
+                            <a th:text="#{button.edit}" th:href="@{/flashcard/edit/{id}(id=${flashcard.id})}">Edit</a>
+                            <a th:text="#{button.delete}" th:href="@{/flashcard/delete/{id}(id=${flashcard.id})}">Delete</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-
         </div>
         <div class="col-md-6">
             <img class="w-100 float-right d-block" src="/images/person-oneSet.jpg" alt="person with a hand on face">
+        </div>
+        <nav th:if="${flashcardsPage.totalPages > 1}">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${flashcardsPage.number != 1} ? disabled">
+                    <a class="page-link" th:href="@{/set/{id}(id=${set.id},page=${flashcardsPage.number - 1}, size=${flashcardsPage.size})}">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${flashcardsPage.number + 1 == pageNumber} ? active"
+                    th:each="pageNumber : ${#numbers.sequence(1, flashcardsPage.totalPages)}">
+                    <a class="page-link" th:text="${pageNumber}"
+                       th:href="@{/set/{id}(id=${set.id},page=${pageNumber - 1}, size=${flashcardsPage.size})}"></a>
+                </li>
+                <li class="page-item"  th:classappend="${flashcardsPage.number + 1 == flashcardsPage.totalPages} ? disabled">
+                    <a class="page-link" th:href="@{/set/{id}(id=${set.id},page=${flashcardsPage.number + 1}, size=${flashcardsPage.size})}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="dropdown dropup">
+            <button class="btn btn-primary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" th:text="${flashcardsPage.size}"/>
+            <div class="dropdown-menu">
+                <h6 class="dropdown-header">Page size</h6>
+                <a class="dropdown-item" href="#" th:each="val : ${#numbers.sequence(5, 15, 5)}"
+                   th:value="${val}" th:text="${val}" th:selected="${val == flashcardsPage.size}">Action</a>
+            </div>
         </div>
     </div>
 </div>
